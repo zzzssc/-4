@@ -8,18 +8,16 @@
 //
 #include<iostream>
 #include<fstream>
-#include<algorithm>
 using namespace std;
 struct student{
     char name1[5];       //学生姓名
-    char number[50];      //学号
-    char  colleage[50];   //学院
-    char  speciality[50];   //专业
-    int ave;
+    char number[5];      //学号
+    char  colleage[10];   //学院
+    double ave;
 };
 struct referee{
-    char name2[8];    //裁判姓名
-    int score[7];    //分数
+    char name2[7];    //裁判姓名
+    int score[5];    //分数
 };
 
 int main()
@@ -44,33 +42,35 @@ int main()
         for(l=0;l<7;l++)
         {
             inf>>referee[l].name2;
-        }
-        for(k=0;k<5;k++)
-        {
+      
             for(j=0;j<7;j++)
             {
-                inf>>referee[k].score[j];
+                inf>>referee[l].score[j];
             }
         }
-        for(k=0;k<5;k++)
+    
+        for(l=0;l<5;l++)
         {
             for(j=0;j<7;j++)
             {
-                if(t<referee[k].score[j])
+                if(t<referee[l].score[j])
                 {
-                    t=referee[k].score[j];
-                    referee[k].score[j]=referee[k].score[j+1];
-                    referee[k].score[j+1]=t;
+                    t=referee[l].score[j];
+                    referee[l].score[j]=referee[l].score[j+1];
+                    referee[l].score[j+1]=t;
                 }
             }
+
+           
         }
-        for(k=0;k<5;k++)
+   
+        for(l=0;l<5;l++)
         {
             for(j=1;j<6;j++)
             {
-                sum=sum+referee[k].score[j];
+                sum=sum+referee[l].score[j];
             }
-            student[k].ave=sum/5;
+            student[l].ave=sum/5;
             sum=0;
         }
     for(k=0;k<5;k++)
@@ -85,13 +85,13 @@ int main()
     }
     
      
-     ofstream output("/Users/s20181106119/Desktop/最终排名.txt");
+    ofstream output("/Users/s20181106119/Desktop/最终排名.txt");
     if(output.is_open())
     {
         int k;
         for(k=0;k<5;k++)
         {
-            output<<student[k].name1<<student[k].colleage<<student[k].number<<student[k].ave<<endl;
+            output<<student[k].name1<<" "<<student[k].colleage<<" "<<student[k].number<<" "<<student[k].ave<<endl;
         
         }
         
